@@ -1,0 +1,102 @@
+[{
+"label": "Enterprise Modeling with the 4EM Method",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=24&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": False
+},
+{"label": "Fizika 8. klasei",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=17&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"
+},
+{"label": "Fizika 9. klasei",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=18&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"},
+{
+"label": "Fizika 10. klasei",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=19&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"},
+{
+"label": "Fizika 11. klasei",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=20&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": False
+},
+{
+"label": "Fizika 12. klasei",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=21&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": False
+},
+{
+"label": "Medijpratība",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=14&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"
+},
+{
+"label": "Study Design and Implementation",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=15&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True
+},
+{
+"label": "Datorika un informātika",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=12&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True
+},
+{
+"label": "Digitālās prasmes 7.-12. klašu latviešu valodas skolotājiem",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=11&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"},
+{
+"label": "Ievads programmēšanas valodā Python", "value": "https://artss.mii.lv/webservice/rest/server.php?courseid=10&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True},
+{"label": "Kiberdrošības pamati iesācējiem",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=9&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True
+},
+{
+"label": "Komercdarbība",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=7&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"
+},
+{
+"label": "VR tehnoloģijas",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=6&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True},
+{
+"label": "Visaptverošā kvalitātes vadība",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=4&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": False},
+{
+"label": "Statistika inženieriem",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=3&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json",
+"disabled": True
+},
+{
+"label": "Vizuālā programmēšana ar Scratch",
+"value": "https://artss.mii.lv/webservice/rest/server.php?courseid=2&wstoken"
+"=a78e76c2570f41a3f180d0979914c7dc&wsfunction"
+"=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json"
+}]
