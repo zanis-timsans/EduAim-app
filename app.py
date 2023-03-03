@@ -34,9 +34,10 @@ app.layout = app_layout.layout()
      Output(component_id='num_students', component_property='children'),
      Output(component_id='num_pairs', component_property='children'),
      Output(component_id="loading-output-2", component_property='children')],
-    [Input(component_id='courses_dropdown', component_property='value')]
+    [Input(component_id='courses_dropdown', component_property='value'),
+     Input(component_id='my_range_slider', component_property='value')]
 )
-def update_telecides(value):
+def update_telecides(courses_dropdown, my_range_slider):
     """
     Load, clean, and visualize data from a Telecides dataset.
 
@@ -54,13 +55,17 @@ def update_telecides(value):
     - sum: A pandas DataFrame containing the sum of watch_time for each section.
     - value (str): Webhook URL.
     """
-    if value is None:
+    if courses_dropdown is None:
         # PreventUpdate prevents ALL outputs updating
         raise dash.exceptions.PreventUpdate
 
+    print(my_range_slider)
+
     # Load and clean data
-    df = dlt.loader(value)
+    df = dlt.loader(courses_dropdown)
     cleaned_df = dlt.cleaner(df)
+
+    cleaned_df = cleaned_df[(cleaned_df['random_numbers'] >= my_range_slider[0])&(cleaned_df['random_numbers']<=my_range_slider[1])]
 
     # Create figures
     fig_sectionid = grf.create_graph('sectionid', df, cleaned_df)
@@ -72,7 +77,7 @@ def update_telecides(value):
     num_students = cleaned_df['user_id'].nunique()
     num_units, num_pairs = dlt.group_dataframe('sectionid', df, cleaned_df)[1:3]
 
-    return fig_sectionid, fig_lessonid, fig_user_id, num_pairs, num_sub, num_students, num_units, value
+    return fig_sectionid, fig_lessonid, fig_user_id, num_pairs, num_sub, num_students, num_units, courses_dropdown
 
 
 # -------------------------------------------------------------------------------------------------------------------

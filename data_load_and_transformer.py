@@ -71,6 +71,8 @@ def cleaner(df):
     ab.sort_values(by=['section', 'lessonid', 'user_id', 'letter'], inplace=True)
     ab.reset_index(inplace=True)
     ab.drop_duplicates(inplace=True)
+
+    ab['random_numbers'] = np.random.randint(0, 10, size=len(ab))
     return ab
 
 

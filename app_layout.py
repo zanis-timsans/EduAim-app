@@ -95,6 +95,33 @@ def layout():
                         ]), className=""
                     )
                 ], className='shadow-sm mt-3 mb-3', style={'columnCount': 2}),
+                dcc.RangeSlider(
+                    id='my_range_slider',  # any name you'd like to give it
+                    marks={
+                        1: '1',  # key=position, value=what you see
+                        2: '2',
+                        3: '3',
+                        4: '4',
+                        5: '5',
+                        6: {'label': '6', 'style': {'color': '#f50', 'font-weight': 'bold'}},
+                        7: '7',
+                    },
+                    step=1,  # number of steps between values
+                    min=0,
+                    max=8,
+                    value=[2, 3],  # default value initially chosen
+                    dots=False,  # True, False - insert dots, only when step>1
+                    allowCross=False,  # True,False - Manage handle crossover
+                    disabled=False,  # True,False - disable handle
+                    pushable=1,  # any number, or True with multiple handles
+                    updatemode='mouseup',  # 'mouseup', 'drag' - update value method
+                    included=True,  # True, False - highlight handle
+                    vertical=False,  # True, False - vertical, horizontal slider
+                    verticalHeight=900,  # hight of slider (pixels) when vertical=True
+                    className='None',
+                    tooltip={'always_visible': False,  # show current slider values
+                             'placement': 'top'},
+                ),
                 dbc.Col([
                     dcc.Loading(id="loading-2", children=[
                         html.Div(id="loading-output-2", style={'display': 'none'}),
