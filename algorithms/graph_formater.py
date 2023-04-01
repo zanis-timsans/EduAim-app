@@ -1,8 +1,5 @@
 import plotly.graph_objects as go
-
-
-# Function for formatting each annotation
-import data_load_and_transformer
+from algorithms import data_load_and_transformer
 
 
 def format_annotation(x, y, z, text, anchor, color):

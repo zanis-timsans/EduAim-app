@@ -6,9 +6,7 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
-import data_load_and_transformer as dlt
-import graph_formater as grf
-import app_layout
+from algorithms import data_load_and_transformer as dlt, graph_formater as grf, app_layout
 
 # Styles - CERULEAN (!), COSMO, CYBORG, DARKLY, FLATLY, JOURNAL, LITERA, LUMEN, LUX, MATERIA (!),
 # MINTY, PULSE (!), SANDSTONE (!), SIMPLEX, SKETCHY, SLATE, SOLAR, SPACELAB (!), SUPERHERO, UNITED (!), YETI (!)
@@ -78,4 +76,4 @@ def update_telecides(value):
 # -------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8051)
