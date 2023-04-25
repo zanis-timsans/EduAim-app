@@ -8,9 +8,13 @@ from assets.courses_list import _courses
 def layout():
     # create course list
     prefix = 'https://'
-    base = 'artss.mii.lv/webservice/rest/server.php?courseid='
-    token = '&wstoken=a78e76c2570f41a3f180d0979914c7dc'
-    function = '&wsfunction=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json'
+    # base = 'artss.mii.lv/webservice/rest/server.php?courseid='
+    # token = '&wstoken=a78e76c2570f41a3f180d0979914c7dc'
+    # function = '&wsfunction=local_notifyemailsignup_functiongetstudentactivitydata&moodlewsrestformat=json'
+
+    base = 'eduaim.moodle.mii.lv/webservice/rest/server.php?courseid='
+    token = '&wstoken=1cf6a9fcd683d94402b54f63e11760cd'
+    function = '&wsfunction=local_eduaimdatamod_functiongetstudentactivitydata&moodlewsrestformat=json'
     courses = _courses
     course_list = [
         {
@@ -25,12 +29,12 @@ def layout():
     param = html.Div([
         dbc.Row(
             dbc.Col([
-                html.H1('ARTSS datu vizualizācija', className="text-center my-5"),
+                html.H1('EduAim datu vizualizācija', className="text-center my-5"),
                 html.Div(['''
                         Šajā tīmekļa lietotnē skolotājs var vizuāli novērot kursa satura piemērotību un efektivitāti 
                         izmantojot Telecīdas
                         ''',
-                          dcc.Link(html.H6('ARTSS kursi', className='mt-3'), href='https://artss.mii.lv/',
+                          dcc.Link(html.H6('EduAim kursi', className='mt-3'), href='https://eduaim.moodle.mii.lv/',
                                    target='_blank'),
                           ], className="text-center my-5"),
             ], width=8,
