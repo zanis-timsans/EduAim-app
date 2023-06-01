@@ -44,7 +44,7 @@ def cleaner(df):
     rez['letter'] = rez['title'].str.strip().str[-1]
 
     # Remove rows that are not a or b
-    rez = rez[(rez['title'].str.contains('0', case=False)) | (rez['title'].str.contains('1', case=False))].copy()
+    rez = rez[(rez['title'].str.contains('A', case=False)) | (rez['title'].str.contains('B', case=False))].copy()
 
     # Remove rows with '.' for 'letter' value
     rez = rez[rez['letter'] != '.'].copy()
@@ -53,20 +53,20 @@ def cleaner(df):
     rez.sort_values(by=['section', 'lessonid', 'user_id'], inplace=True)
 
     # mapping true/false to p/n (pareizi/nepareizi)
-    di = {True: 'p', False: 'n'}
+    di = {'true': 'p', 'false': 'n'}
     rez.replace({'correct_answer': di}, inplace=True)
 
     # Convert everything to uppercase in case there are some in lowercase
     rez['letter'] = rez['letter'].str.upper()
 
-    a = rez[(rez['letter'].shift(-1) == '1')].copy()
-    b = rez[(rez['letter'] == '1')].copy()
+    a = rez[(rez['letter'].shift(-1) == 'B')].copy()
+    b = rez[(rez['letter'] == 'B')].copy()
     ab = a.append(b, sort=True)
     ab.sort_values(by=['section', 'lessonid', 'user_id', 'letter'], inplace=True)
     ab.reset_index(inplace=True)
     ab.drop_duplicates(inplace=True)
-    a = ab[(ab['letter'] == '0')].copy()
-    b = ab[(ab['letter'].shift(1) == '0')].copy()
+    a = ab[(ab['letter'] == 'A')].copy()
+    b = ab[(ab['letter'].shift(1) == 'A')].copy()
     ab = a.append(b, sort=True)
     ab.sort_values(by=['section', 'lessonid', 'user_id', 'letter'], inplace=True)
     ab.reset_index(inplace=True)
