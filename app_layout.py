@@ -131,7 +131,7 @@ def layout():
         ], justify="center"),
         dbc.Row(
             dbc.Col(
-                # html.H1('Papildus saturs'),
+                html.H1('Papildus saturs'),
             ),
             justify='center'
         )
