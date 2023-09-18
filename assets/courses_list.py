@@ -4,5 +4,6 @@ _courses = {
     'Informācijas tehnoloģijas pamatizglītībā': [79, False],
     'Ievads lietotāju pieredzē': [55, False],
     'Stāstniecības lietpratība': [83, False],
-    'Programmēšanas valodas Python pamati': [42, False]
+    'Programmēšanas valodas Python pamati': [42, False],
+    'Datu pratība': [5, False]
 }
