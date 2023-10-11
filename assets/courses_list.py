@@ -11,8 +11,9 @@ _courses = {
     'Datu ieguve un zināšanu atklāšana': [51, False],
     'Datu drošība informāciju tehnoloģijās': [46, False],
     'Python pamati datu apstrādei': [47, False],
-    'Digitālā kriminālistika': [57, False],
+    'Digitālā kriminālistika': [57, True],
     'Lietotāju pieredzes psiholoģiskais pamats': [24, False],
     'Padziļināta informācijas pratība': [69, False],
-    'Informācijpratības pamati': [14, False]
+    'Informācijpratības pamati': [14, False],
+    'Privātums, datu aizsardzība un informācijas drošība': [23, False]
 }
