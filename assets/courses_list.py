@@ -15,5 +15,6 @@ _courses = {
     'Lietotāju pieredzes psiholoģiskais pamats': [24, False],
     'Padziļināta informācijas pratība': [69, False],
     'Informācijpratības pamati': [14, False],
-    'Privātums, datu aizsardzība un informācijas drošība': [23, False]
+    'Privātums, datu aizsardzība un informācijas drošība': [23, False],
+    'Datu analīze ar Excel': [48, False]
 }
