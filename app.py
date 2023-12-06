@@ -6,17 +6,16 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
-import data_load_and_transformer as dlt
-import graph_formater as grf
-import app_layout
+from algorithms import data_load_and_transformer as dlt
+from interface import app_layout, graph_formater as grf
 
 # Styles - CERULEAN (!), COSMO, CYBORG, DARKLY, FLATLY, JOURNAL, LITERA, LUMEN, LUX, MATERIA (!),
 # MINTY, PULSE (!), SANDSTONE (!), SIMPLEX, SKETCHY, SLATE, SOLAR, SPACELAB (!), SUPERHERO, UNITED (!), YETI (!)
 external_stylesheets = [dbc.themes.PULSE]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,  # , external_stylesheets=external_stylesheets
-                meta_tags=[{'name': 'viewport', 'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.2, '
-                                                           'minimum-scale=0.5,'}])
+                meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1", 'charSet':'“UTF-8”'}])
+
 server = app.server
 
 # APPLICATION LAYOUT
