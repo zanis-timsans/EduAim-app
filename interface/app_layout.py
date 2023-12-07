@@ -27,6 +27,7 @@ def layout():
 
     # APPLICATION LAYOUT
     param = html.Div([
+        html.Link(rel='icon', href='../assets/favicon.ico', type='image/x-icon'),
         # Banner ------------------------------------------------------------
         html.Div(
             [
