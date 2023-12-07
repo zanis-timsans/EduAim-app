@@ -18,6 +18,8 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,  # , extern
 
 server = app.server
 
+app.title = "ZUM"
+
 # APPLICATION LAYOUT
 app.layout = app_layout.layout()
 
