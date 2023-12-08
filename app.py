@@ -14,7 +14,8 @@ from interface import app_layout, graph_formater as grf
 external_stylesheets = [dbc.themes.PULSE]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,  # , external_stylesheets=external_stylesheets
-                meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1", 'charSet':'“UTF-8”'}])
+                meta_tags=[
+                    {"name": "viewport", "content": "width=device-width, initial-scale=1", 'charSet': '“UTF-8”'}])
 
 server = app.server
 
@@ -23,18 +24,22 @@ app.title = "ZUM"
 # APPLICATION LAYOUT
 app.layout = app_layout.layout()
 
-
 # ------------------- CALLBACKS ------------------------------------------------------------------
-@app.callback(
-    [Output(component_id='telecides-unit', component_property='figure'),
-     Output(component_id='telecides-sub-unit', component_property='figure'),
-     Output(component_id='telecides-student', component_property='figure'),
-     Output(component_id='num_units', component_property='children'),
-     Output(component_id='num_sub', component_property='children'),
-     Output(component_id='num_students', component_property='children'),
-     Output(component_id='num_pairs', component_property='children'),
-     Output(component_id="loading-output-2", component_property='children')],
-    [Input(component_id='courses_dropdown', component_property='value')]
+@app.callback([
+    Output(component_id='telecides-unit', component_property='figure'),
+    Output(component_id='telecides-sub-unit', component_property='figure'),
+    Output(component_id='telecides-student', component_property='figure'),
+    Output(component_id="sub-unit-count", component_property='figure'),
+    Output(component_id="student-activity", component_property='figure'),
+    Output(component_id='num_units', component_property='children'),
+    Output(component_id='num_sub', component_property='children'),
+    Output(component_id='num_students', component_property='children'),
+    Output(component_id='num_pairs', component_property='children'),
+    Output(component_id="loading-output-2", component_property='children'),
+    ],
+    [
+        Input(component_id='courses_dropdown', component_property='value'),
+     ],
 )
 def update_telecides(value):
     """
@@ -61,18 +66,32 @@ def update_telecides(value):
     # Load and clean data
     df = dlt.loader(value)
     cleaned_df = dlt.cleaner(df)
+    print(cleaned_df)
+    agg_df = dlt.aggregator(cleaned_df)
 
     # Create figures
-    fig_sectionid = grf.create_graph('sectionid', df, cleaned_df)
-    fig_lessonid = grf.create_graph('lessonid', df, cleaned_df)
-    fig_user_id = grf.create_graph('user_id', df, cleaned_df)
+    fig_sectionid = grf.create_telecides('sectionid', df, agg_df)
+    fig_lessonid = grf.create_telecides('lessonid', df, agg_df)
+    fig_user_id = grf.create_telecides('user_id', df, agg_df)
+
+    fig_subunit_count = grf.create_subunit_count(df)
+    fig_student_activity = grf.create_student_activity(df)
 
     # Compute summary statistics
     num_sub = cleaned_df['lessonid'].nunique()
     num_students = cleaned_df['user_id'].nunique()
     num_units, num_pairs = dlt.group_dataframe('sectionid', df, cleaned_df)[1:3]
 
-    return fig_sectionid, fig_lessonid, fig_user_id, num_pairs, num_sub, num_students, num_units, value
+    return fig_sectionid, \
+           fig_lessonid, \
+           fig_user_id, \
+           fig_subunit_count, \
+           fig_student_activity, \
+           num_pairs, \
+           num_sub, \
+           num_students, \
+           num_units, \
+           value
 
 
 # -------------------------------------------------------------------------------------------------------------------

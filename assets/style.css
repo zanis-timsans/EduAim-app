@@ -25,6 +25,9 @@ a {
   justify-content: space-between;
 }
 
+.theme-color {
+    color: var(--secondary)
+}
 /* Banner */
 
 .banner {
@@ -73,9 +76,11 @@ h1 {
   padding: 35px;
 }
 
-h2 {
+h2, h3, h4, h5, h6 {
   color: var(--secondary)
 }
+
+
 
 /* Link to documentation */
 
@@ -120,6 +125,38 @@ h2 {
   width: 60vw;
   margin-top: 2vh;
   margin-left: 1.5vw;
+}
+
+/* Bubbles */
+
+.hover-text {
+  display: none;
+}
+
+.bubble:hover + .hover-text {
+  display: block!important;
+  position: absolute!important;
+  background-color: var(--secondary)!important;
+  padding: 10px!important;
+  border-radius: 50px!important;
+  z-index: 1!important;
+  font-size: 12px!important;
+  -webkit-animation: fadeIn 1s!important;
+  animation: fadeIn 1s!important;
+  color: white!important;
+  cursor: pointer!important;
+  text-align: center!important;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
 
 /* Search bar */
@@ -600,15 +637,11 @@ h2 {
   color: rgba(60, 25, 240, 0.8);
 }
 
-.author-info-default-text {
-  order: 2;
-  font-size: 2vh;
-  text-align: center;
-  width: 25vw;
-  margin-top: -10vh;
+.graph-sub-text {
   font-family: Courier New, monospace;
-  color: rgba(3, 3, 3, 0.2);
-  margin: auto;
+  color: rgba(3, 3, 3, 0.6);
+  font-size:1.2vh;
+  text-align:center;
 }
 
 .paper-info-text {

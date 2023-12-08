@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc
 from interface import graph_formater
 from config.courses_list import _courses
+from urllib.parse import urlparse, parse_qs
 
 
 def layout():
@@ -61,12 +62,12 @@ def layout():
             className="banner",
         ),
 
-        # Search bar ------------------------------------------------------------
+        # Dropdown bar ------------------------------------------------------------
         html.Div(
             [
 
-                html.H1('ZUM', className="text-center pb-0", style={"font-size": "5rem"}),
-                html.H1('Zināšanu uztveres monitorings', className="text-center pt-0 my-0 pb-3", style={"font-size": "1.5rem"}),
+                html.H1('ZUM', className="text-center pb-0", style={"fontSize": "5rem"}),
+                html.H1('Zināšanu uztveres monitorings', className="text-center pt-0 my-0 pb-3", style={"fontSize": "1.5rem"}),
                 html.Div(['''
                     ZUM ir interaktīva datu vizualizācijas tīmekļa lietojumprogramma, kas galvenokārt paredzēta 
                     izglītības iestāžu akadēmiskajam personālam, piemēram, skolotājiem un lektoriem, lai analizētu un 
@@ -105,31 +106,41 @@ def layout():
                     dbc.Card(
                         dbc.CardBody([
                             html.Div('Tēmas', className="card-title text-center"),
-                            html.H2(id='num_units', className='text-center clearfix')
+                            html.H2(id='num_units', className='text-center clearfix bubble'),
+                            html.Div(
+                                "Kopējais tēmu skaits kursā",
+                                className='hover-text',
+                            ),
                         ]), className=""
                     ),
                     dbc.Card(
                         dbc.CardBody([
                             html.Div('Apakštēmas', className="card-title text-center"),
-                            html.H2(id='num_sub', className='text-center')
+                            html.H2(id='num_sub', className='text-center bubble'),
+                            html.Div(
+                                "Kopējais apakštēmu skaits kursā",
+                                className='hover-text',
+                            ),
                         ]), className=""
                     ),
                     dbc.Card(
                         dbc.CardBody([
                             html.Div('Studenti', className="card-title text-center"),
-                            html.H2(id='num_students', className='text-center')
+                            html.H2(id='num_students', className='text-center bubble'),
+                            html.Div(
+                                "Kopējais analizēto studentu skaits kursā",
+                                className='hover-text',
+                            ),
                         ]), className=""
                     ),
                     dbc.Card(
                         dbc.CardBody([
                             html.Div('Analizētie pāri', className="card-title text-center"),
-                            html.H2(id='num_pairs', className='text-center')
-                        ]), className=""
-                    ),
-                    dbc.Card(
-                        dbc.CardBody([
-                            html.Div('Mediāna', className="card-title text-center"),
-                            html.H2('2.3', id='median', className='text-center clearfix', style={"color": "red"})
+                            html.H2(id='num_pairs', className='text-center clearfix bubble'),
+                            html.Div(
+                                "Kopējais kursā analizēto jautājumu pāru skaits (ievadjautājums - pašpārbaudes jautājums)",
+                                className='hover-text',
+                            ),
                         ]), className=""
                     ),
                 ], className='shadow-sm mt-3 mb-3', style={'columnCount': 2}),
@@ -138,29 +149,53 @@ def layout():
                         html.Div(id="loading-output-2", style={'display': 'none'}),
                         dcc.Tabs([
                             dcc.Tab(label='Tēmas', children=[
+                                html.H6('Punktu novietojusms pa tēmām', className="text-center mt-4"),
+                                html.P('Cik piemērota, nepiemērota vai viegla ir katra no tēmām',
+                                       className="mt-1 ml-3 graph-sub-text text-center"),
                                 dcc.Graph(
                                     id='telecides-unit',
                                     figure=graph_formater.fig,
                                     config={'displaylogo': False, 'showTips': True}
-                                )
-                            ]),
+                                ),
+                            ],  className='custom-tab', selected_className='custom-tab--selected'),
                             dcc.Tab(label='Apakštēmas', children=[
+                                html.H6('Punktu novietojusms pa apakštēmām', className="text-center mt-4"),
+                                html.P('Cik piemērota, nepiemērota vai viegla ir katra no apakštēmām',
+                                       className="mt-1 ml-3 graph-sub-text text-center"),
                                 dcc.Graph(
                                     id='telecides-sub-unit',
                                     figure=graph_formater.fig,
                                     config={'displaylogo': False, 'showTips': True},
-                                )
+                                ),
                             ]),
                             dcc.Tab(label='Studenti', children=[
+                                html.H6('Punktu novietojusms katram studentam', className="text-center mt-4"),
+                                html.P(
+                                    'Cik piemērots kurss ir bijis katram no studentiem individuāli. Studentus var atpazīt pēc id numura, kas tiek piešķirts Moodle',
+                                    className="mt-1 ml-3 graph-sub-text text-center"),
                                 dcc.Graph(
                                     id='telecides-student',
                                     figure=graph_formater.fig,
                                     config={'displaylogo': False, 'showTips': True},
-                                )
+                                ),
                             ]),
                         ]),
                     ], type="default", fullscreen=False),
                 ], className='shadow-sm border'),
+                dbc.Row([
+                    dbc.Col([
+                        dcc.Graph(
+                            id='sub-unit-count',
+                            config={'displaylogo': False, 'showTips': True}
+                        ),
+                    ], className='shadow-sm border m-3'),
+                    dbc.Col([
+                        dcc.Graph(
+                            id='student-activity',
+                            config={'displaylogo': False, 'showTips': True}
+                        ),
+                    ], className='shadow-sm border m-3 clearfix'),
+                ], className='mt-3 clearfix'),
             ], width=8),
             dbc.Col([
                 html.Div([html.H5('Diagramma'),
@@ -214,114 +249,5 @@ def layout():
                 ),
             ]
         ),
-
-        # dbc.Row(
-        #     dbc.Col([
-        #         html.H1('EduAim datu vizualizācija', className="text-center my-5"),
-        #         html.Div(['''
-        #                 Šajā tīmekļa lietotnē skolotājs var vizuāli novērot kursa satura piemērotību un efektivitāti
-        #                 izmantojot Telecīdas
-        #                 ''',
-        #                   dcc.Link(html.H6('EduAim kursi', className='mt-3'), href='https://eduaim.moodle.mii.lv/',
-        #                            target='_blank'),
-        #                   ], className="text-center my-5"),
-        #     ], width=8,
-        #     ), justify='center',
-        # ),
-        #
-        # dbc.Row([
-        #     dbc.Col([
-        #         html.Div([html.H5('Diagramma'),
-        #                   '''
-        #             Vizualizācijas metodes nosaukums ir Telecīdas. Tā ir 3D diagramma, kur katrs punkts plaknē norāda uz
-        #             vienu no satura tēmām. Apmācamajam atbilstošs un efektīvs saturs ir tad, kad punkts atrodas tuvāk
-        #             trīsstūra kreisajam apakšējam stūrim.
-        #             '''], className='shadow-sm ml-3 my-3 border p-3'
-        #                  ),
-        #         html.Div("Izvēlies kursu", className='ml-3'),
-        #         dcc.Dropdown(options=course_list,
-        #                      searchable=True,
-        #                      clearable=False,
-        #                      placeholder='Izvēlies vai ievadi kursa nosaukumu',
-        #                      persistence=True,
-        #                      persistence_type='memory',  # memory-tab refresh, session-tab is closed, local-cookies
-        #                      id='courses_dropdown',
-        #                      className='shadow-sm ml-3 mb-5'
-        #                      ),
-        #         html.Div(
-        #             [
-        #                 html.Div([
-        #                     html.H6('Satura piemērotības zonas'),
-        #                     html.Img(title='paraugs', src='../assets/landscape-segments.jpg', width='100%'),
-        #                     dbc.Alert("Atbilstošs saturs", color="success", className='mb-0'),
-        #                     dbc.Alert("Neatbilstošs saturs. Pārāk sarežģīts", color="danger", className='my-1'),
-        #                     dbc.Alert("Daļēji neatbilstošs, pārāk viegls saturs. ", color="primary", className='mt-0'),
-        #                 ], className='shadow-sm mb-3 border p-3'),
-        #             ], className='ml-3'
-        #         )
-        #     ], width=3),
-        #     dbc.Col([
-        #         dbc.CardGroup([
-        #             dbc.Card(
-        #                 dbc.CardBody([
-        #                     html.Div('Tēmas', className="card-title text-center"),
-        #                     html.H1(id='num_units', className='text-center clearfix')
-        #                 ]), className=""
-        #             ),
-        #             dbc.Card(
-        #                 dbc.CardBody([
-        #                     html.Div('Apakštēmas', className="card-title text-center"),
-        #                     html.H1(id='num_sub', className='text-center')
-        #                 ]), className=""
-        #             ),
-        #             dbc.Card(
-        #                 dbc.CardBody([
-        #                     html.Div('Studenti', className="card-title text-center"),
-        #                     html.H1(id='num_students', className='text-center')
-        #                 ]), className=""
-        #             ),
-        #             dbc.Card(
-        #                 dbc.CardBody([
-        #                     html.Div('Analizētie pāri', className="card-title text-center"),
-        #                     html.H1(id='num_pairs', className='text-center clearfix')
-        #                 ]), className=""
-        #             )
-        #         ], className='shadow-sm mt-3 mb-3', style={'columnCount': 2}),
-        #         dbc.Col([
-        #             dcc.Loading(id="loading-2", children=[
-        #                 html.Div(id="loading-output-2", style={'display': 'none'}),
-        #                 dcc.Tabs([
-        #                     dcc.Tab(label='Tēmas', children=[
-        #                         dcc.Graph(
-        #                             id='telecides-unit',
-        #                             figure=graph_formater.fig,
-        #                             config={'displaylogo': False, 'showTips': True}
-        #                         )
-        #                     ]),
-        #                     dcc.Tab(label='Apakštēmas', children=[
-        #                         dcc.Graph(
-        #                             id='telecides-sub-unit',
-        #                             figure=graph_formater.fig,
-        #                             config={'displaylogo': False, 'showTips': True},
-        #                         )
-        #                     ]),
-        #                     dcc.Tab(label='Studenti', children=[
-        #                         dcc.Graph(
-        #                             id='telecides-student',
-        #                             figure=graph_formater.fig,
-        #                             config={'displaylogo': False, 'showTips': True},
-        #                         )
-        #                     ]),
-        #                 ]),
-        #             ], type="default", fullscreen=False),
-        #         ], className='shadow-sm border'),
-        #     ], width=8),
-        # ], justify="center"),
-        # dbc.Row(
-        #     dbc.Col(
-        #         # html.H1('Papildus saturs'),
-        #     ),
-        #     justify='center'
-        # )
     ], className="app-layout",)
     return param
